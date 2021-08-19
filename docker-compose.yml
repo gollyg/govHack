@@ -1,0 +1,33 @@
+# This is a minimal docker compose file to run a standalone connect worker.
+---
+version: '3.0'
+services:
+
+  connect:
+    image: ${REPOSITORY}/cp-server-connect:${CONFLUENT_DOCKER_TAG}
+    container_name: connect
+    ports:
+      - "8083:8083"
+    volumes:
+      - ./config:/opt/docker/connect/
+    command:
+      - bash
+      - -c
+      - |
+        echo "Installing connector plugins"
+        # Add your preferred sink connectors here by copying the install command and adding a reference to your desired connector.
+        # For a list of connectors visit https://www.confluent.io/hub/
+
+        confluent-hub install --no-prompt confluent-hub install mongodb/kafka-connect-mongodb:1.6.1
+        confluent-hub install --no-prompt confluent-hub install confluentinc/kafka-connect-jdbc:10.2.1
+        confluent-hub install --no-prompt confluent-hub install confluentinc/kafka-connect-elasticsearch:11.1.0
+        confluent-hub install --no-prompt snowflakeinc/snowflake-kafka-connector:1.5.5
+        confluent-hub install --no-prompt wepay/kafka-connect-bigquery:2.1.5
+        confluent-hub install --no-prompt confluentinc/kafka-connect-http:1.4.0
+        confluent-hub install --no-prompt neo4j/kafka-connect-neo4j:1.0.9
+        
+        echo "Launching Kafka Connect worker"
+        # Launch instances of connectors by adding a reference to their configuration file as arguments below.
+        /bin/connect-standalone /opt/docker/connect/worker.properties /opt/docker/connect/filesteam_covid_cases_postcode.properties /opt/docker/connect/filesteam_deathsbydateandstate.properties 
+        
+
