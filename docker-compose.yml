@@ -28,6 +28,6 @@ services:
         
         echo "Launching Kafka Connect worker"
         # Launch instances of connectors by adding a reference to their configuration file as arguments below.
-        /bin/connect-standalone /opt/docker/connect/worker.properties /opt/docker/connect/filesteam_covid_cases_postcode.properties /opt/docker/connect/filesteam_deathsbydateandstate.properties 
+        /bin/connect-standalone /opt/docker/connect/worker.properties /opt/docker/connect/filestream_covid_cases_postcode.properties
         
 
