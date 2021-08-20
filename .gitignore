@@ -1,2 +1,2 @@
 worker.properties
-config/*.txt
+config/output/*.txt

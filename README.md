@@ -9,7 +9,7 @@ This repository is designed to help you get access to a number of live COVID dat
 2. Request your api key and secret from a Confluent representative via Slack. You will also get a team_id.
 3. Copy `./config/worker.properties.default` to `./config/worker.properties`.
 4. Open this new file `./config/worker.properties` and replace the {{ CLUSTER_API_KEY }} and {{ CLUSTER_API_SECRET }} placeholders with your API key and API secret.
-5. Open `./config/filestream_covid_cases_postcode.properties`, add your 
+5. Open `./config/filestream_covid_cases_postcode.properties`, add your team-id and uncomment the second line.
 6. Save the file.
 7. Launch the connect container using the `docker compose up` command.
 
