@@ -6,10 +6,12 @@ This repository is designed to help you get access to a number of live COVID dat
 
 # Getting started
 1. Clone this repository to your local development machine.
-2. Request your Connect configuration file (`worker.properties`) from a Confluent representative.
-3. Copy the file to `./config/worker.properties`. *Note: this file will be ignored by git to stop your private connection details ending up in a repo.*
-4. Save the file.
-5. Launch the connect container using the `docker compose up` command.
+2. Request your api key and secret from a Confluent representative via Slack. You will also get a team_id.
+3. Copy `./config/worker.properties.default` to `./config/worker.properties`.
+4. Open this new file `./config/worker.properties` and replace the {{ CLUSTER_API_KEY }} and {{ CLUSTER_API_SECRET }} placeholders with your API key and API secret.
+5. Open `./config/filestream_covid_cases_postcode.properties`, add your 
+6. Save the file.
+7. Launch the connect container using the `docker compose up` command.
 
 This should launch a stand-alone connect worker (that is the software that is reponsible for running connectors). It will then create an instance of a sample connector. This is a simple connector that will connect to Confluent Cloud, read events from a 'topic', and then output the data to `./config/test.sink.txt`.
 
